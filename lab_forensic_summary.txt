@@ -1,0 +1,24 @@
+SBT-DF203 Lab 1: HTTP Analysis Using Wireshark - Text Traffic
+Student Name: Ifeanyichukwu Raphael
+Reg No: 202520850LE
+Date: September 07, 2026
+
+=== CHAIN OF CUSTODY & HASH MANIFEST ===
+Original Capture File: evidence/basic.pcapng
+Working Capture File: working/basic_working.pcapng
+SHA-256 Hash: 48996916527842abf0114489c15dc1448c748af1b4c6a1bc9c3520213cbde502
+
+=== FORENSIC ANALYSIS SUMMARY ===
+1. TCP Handshake Analysis (Stream 0):
+   - Frame 1: SYN (Client 127.0.0.1:36916 -> Server 127.0.0.1:80, Seq=0)
+   - Frame 2: SYN, ACK (Server 127.0.0.1:80 -> Client 127.0.0.1:36916, Seq=0, Ack=1)
+   - Frame 3: ACK (Client 127.0.0.1:36916 -> Server 127.0.0.1:80, Seq=1, Ack=1)
+
+2. HTTP Request/Response Details:
+   - Frame 4: HTTP GET /basic.html (Host: 127.0.0.1, User-Agent: curl/8.19.0)
+   - Frame 6: HTTP 200 OK (Server: Apache/2.4.68 (Debian), Content-Type: text/html, Length: 135)
+   - Extracted Body Evidence: <html><body><h1>SBT-DF203 HTTP Evidence</h1><p>Name: Ifeanyichukwu Raphael</p><p>Reg No: 202520850LE</p></body></html>
+
+3. Encapsulation & Connection Termination:
+   - Frame 8-10: Connection teardown via TCP FIN-ACK flags (Flags: 0x0011).
+   - MAC Address Note: Dummy MAC address 00:00:00:00:00:00 observed due to virtual loopback interface (lo).
